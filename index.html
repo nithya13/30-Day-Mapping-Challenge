@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<!--
+	Story by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Best Restaurants</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		#mapbox {
+			position: relative;
+			height: 100vh;
+			margin-top: 1em;
+			margin-bottom: 1em;
+			margin-right: 2em;
+			margin-left: 1em;
+		}
+
+		#map {
+			position: relative;
+			display: block;
+			width: 50%;
+			
+		}
+		h4{
+			font-family: 'Alegreya', serif;
+			font-size: medium;
+		}
+		.mapboxgl-popup-content{
+			border-color: #332222;
+			border-style: solid;
+			border-width: 1px;
+		}
+		.mapboxgl-popup-close-button{
+display: none;
+		}
+		@media only screen and (max-width: 900px)
+{
+    #map
+    {
+        display: inline-block; 
+        float: none; 
+        width: 100%;
+        padding: 300px 0;
+    }
+}
+		
+	</style>
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper" class="divided">
+
+		<!-- One -->
+		<section
+			class="banner style1 orient-left content-align-left map-position-right fullscreen onload-map-fade-in onload-content-fade-right">
+			<div class="content">
+				<h1>The Best Restaurants in the Twin Cities</h1>
+				<p class="major">A map of the best restaurants in the cities as per the <a
+						href="https://timesfoodawards.com/times_food_nightlife_awards/2023/Hyderabad_winners.html">Times
+						Food and Nightlife Awards, 2023 </a> </p>
+			</div>
+			<!-- <div class="image">
+				<img src="images\Hyd-pop-2.jpg" alt="" />
+			</div> -->
+			<div id='map'></div>
+			<script>
+				// The value for 'accessToken' begins with 'pk...'
+				mapboxgl.accessToken = 'pk.eyJ1Ijoibml0aHlhMTMiLCJhIjoiY2plNTFycWd5MW9xdzMxcXAyOGdwYnJwOSJ9.2XiKS9esxLPSngIvFRGp8A'; 
+				const map = new mapboxgl.Map({
+				  container: 'map',
+				  // Replace YOUR_STYLE_URL with your style URL.
+				  style: 'mapbox://styles/nithya13/clo8gmrfd00x201qv79u4ahr6', 
+				  center: [78.4867, 17.3850],
+				  zoom: 10.7
+				});
+				  
+				/* 
+			Add an event listener that runs
+			  when a user clicks on the map element.
+			*/
+			map.on('click', (event) => {
+			  // If the user clicked on one of your markers, get its information.
+			  const features = map.queryRenderedFeatures(event.point, {
+				layers: ['data-driven-circles'] // replace with your layer name
+			  });
+			  if (!features.length) {
+				return;
+			  }
+			  const feature = features[0];
+			
+			  // Code from the next step will go here.
+			
+			const popup = new mapboxgl.Popup({ offset: [0, -15] })
+			  .setLngLat(feature.geometry.coordinates)
+			  .setHTML(
+				`<h4>${feature.properties.Cuisine}</h4><p>${feature.properties.Category}</p>`
+			  )
+			  .addTo(map);
+			});
+				// Code from the next step will go here.
+			
+				</script>
+		</section>
+
+		<!-- Two -->
+		<!-- <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in"
+			id="mapbox">
+			
+				<div id='map'></div>
+				<script>
+				// The value for 'accessToken' begins with 'pk...'
+				mapboxgl.accessToken = 'pk.eyJ1Ijoibml0aHlhMTMiLCJhIjoiY2plNTFycWd5MW9xdzMxcXAyOGdwYnJwOSJ9.2XiKS9esxLPSngIvFRGp8A'; 
+				const map = new mapboxgl.Map({
+				  container: 'map',
+				  // Replace YOUR_STYLE_URL with your style URL.
+				  style: 'mapbox://styles/nithya13/clo8gmrfd00x201qv79u4ahr6', 
+				  center: [78.4867, 17.3850],
+				  zoom: 10.7
+				});
+				  
+				/* 
+			Add an event listener that runs
+			  when a user clicks on the map element.
+			*/
+			map.on('click', (event) => {
+			  // If the user clicked on one of your markers, get its information.
+			  const features = map.queryRenderedFeatures(event.point, {
+				layers: ['data-driven-circles'] // replace with your layer name
+			  });
+			  if (!features.length) {
+				return;
+			  }
+			  const feature = features[0];
+			
+			  // Code from the next step will go here.
+			
+			const popup = new mapboxgl.Popup({ offset: [0, -15] })
+			  .setLngLat(feature.geometry.coordinates)
+			  .setHTML(
+				`<h4>${feature.properties.Cuisine}</h4><p>${feature.properties.Category}</p>`
+			  )
+			  .addTo(map);
+			});
+				// Code from the next step will go here.
+			
+				</script>
+			  
+		</section> -->
+
+
+
+		<!-- Footer -->
+		<footer class="wrapper style1 align-center">
+			<div class="inner">
+				<!-- <ul class="icons">
+					<li><a href="poppadomco.com" class="icon brands style2 fa-twitter"><span class="label">Designed by Nithya Subramanian</span></a></li>
+					
+					<li><a href="https://www.instagram.com/nithya.sub/" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a>
+					</li>
+					<li><a href="https://www.linkedin.com/in/nithyas/" class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a>
+					</li>
+					<li><a href="mailto:nithya13@gmail.com" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+				</ul> -->
+				<p><a href="poppadomco.com"> PoppadomCo</a></p>
+				<p>&copy; Pop. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
