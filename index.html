@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="assets/css/noscript.css" />
 	</noscript>
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
 	<style>
 		body {
 			margin: 0;
@@ -35,30 +35,42 @@
 			position: relative;
 			display: block;
 			width: 50%;
-			
+
 		}
-		h4{
+
+		h4 {
 			font-family: 'Alegreya', serif;
 			font-size: medium;
 		}
-		.mapboxgl-popup-content{
+
+		.mapboxgl-popup-content {
 			border-color: #332222;
 			border-style: solid;
 			border-width: 1px;
 		}
-		.mapboxgl-popup-close-button{
-display: none;
+
+		.mapboxgl-popup-close-button {
+			display: none;
 		}
-		@media only screen and (max-width: 900px)
-{
-    #map
-    {
-        display: inline-block; 
-        float: none; 
-        width: 100%;
-        padding: 300px 0;
+		
+		@media only screen and (max-width: 900px) {
+			#map {
+				display: inline-block;
+
+				width: 100%;
+				padding: 300px 0;
+			}
+			.mapboxgl-popup .mapboxgl-popup-anchor-bottom{
+				position: relative;
+				display: flex;
+				max-width: 50px;
+
+        
+		padding: 1em;
     }
+   
 }
+
 		
 	</style>
 </head>
@@ -80,90 +92,62 @@ display: none;
 			<!-- <div class="image">
 				<img src="images\Hyd-pop-2.jpg" alt="" />
 			</div> -->
+			
 			<div id='map'></div>
 			<script>
 				// The value for 'accessToken' begins with 'pk...'
-				mapboxgl.accessToken = 'pk.eyJ1Ijoibml0aHlhMTMiLCJhIjoiY2plNTFycWd5MW9xdzMxcXAyOGdwYnJwOSJ9.2XiKS9esxLPSngIvFRGp8A'; 
+				mapboxgl.accessToken = 'pk.eyJ1Ijoibml0aHlhMTMiLCJhIjoiY2plNTFycWd5MW9xdzMxcXAyOGdwYnJwOSJ9.2XiKS9esxLPSngIvFRGp8A';
 				const map = new mapboxgl.Map({
-				  container: 'map',
-				  // Replace YOUR_STYLE_URL with your style URL.
-				  style: 'mapbox://styles/nithya13/clo8gmrfd00x201qv79u4ahr6', 
-				  center: [78.4867, 17.3850],
-				  zoom: 10.7
+					container: 'map',
+					// Replace YOUR_STYLE_URL with your style URL.
+					style: 'mapbox://styles/nithya13/clo8gmrfd00x201qv79u4ahr6',
+					center: [78.4867, 17.3850],
+					zoom: 10.7
 				});
-				  
+
 				/* 
 			Add an event listener that runs
 			  when a user clicks on the map element.
 			*/
-			map.on('click', (event) => {
-			  // If the user clicked on one of your markers, get its information.
-			  const features = map.queryRenderedFeatures(event.point, {
-				layers: ['data-driven-circles'] // replace with your layer name
-			  });
-			  if (!features.length) {
-				return;
-			  }
-			  const feature = features[0];
-			
-			  // Code from the next step will go here.
-			
-			const popup = new mapboxgl.Popup({ offset: [0, -15] })
-			  .setLngLat(feature.geometry.coordinates)
-			  .setHTML(
-				`<h4>${feature.properties.Cuisine}</h4><p>${feature.properties.Category}</p>`
-			  )
-			  .addTo(map);
-			});
+				map.on('click', (event) => {
+					
+					// If the user clicked on one of your markers, get its information.
+					const features = map.queryRenderedFeatures(event.point, {
+						layers: ['data-driven-circles'] // replace with your layer name
+					});
+					if (!features.length) {
+						return;
+					}
+					const feature = features[0];
+
+					// Code from the next step will go here.
+
+					const popup = new mapboxgl.Popup({ offset: [0, -15] })
+						.setLngLat(feature.geometry.coordinates)
+						.setHTML(
+							`<h4>${feature.properties.Cuisine}</h4><p>${feature.properties.Category}</p>`
+						)
+						.addTo(map);
+				});
 				// Code from the next step will go here.
-			
-				</script>
+
+			</script>
 		</section>
 
-		<!-- Two -->
-		<!-- <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in"
-			id="mapbox">
-			
-				<div id='map'></div>
-				<script>
-				// The value for 'accessToken' begins with 'pk...'
-				mapboxgl.accessToken = 'pk.eyJ1Ijoibml0aHlhMTMiLCJhIjoiY2plNTFycWd5MW9xdzMxcXAyOGdwYnJwOSJ9.2XiKS9esxLPSngIvFRGp8A'; 
-				const map = new mapboxgl.Map({
-				  container: 'map',
-				  // Replace YOUR_STYLE_URL with your style URL.
-				  style: 'mapbox://styles/nithya13/clo8gmrfd00x201qv79u4ahr6', 
-				  center: [78.4867, 17.3850],
-				  zoom: 10.7
-				});
-				  
-				/* 
-			Add an event listener that runs
-			  when a user clicks on the map element.
-			*/
-			map.on('click', (event) => {
-			  // If the user clicked on one of your markers, get its information.
-			  const features = map.queryRenderedFeatures(event.point, {
-				layers: ['data-driven-circles'] // replace with your layer name
-			  });
-			  if (!features.length) {
-				return;
-			  }
-			  const feature = features[0];
-			
-			  // Code from the next step will go here.
-			
-			const popup = new mapboxgl.Popup({ offset: [0, -15] })
-			  .setLngLat(feature.geometry.coordinates)
-			  .setHTML(
-				`<h4>${feature.properties.Cuisine}</h4><p>${feature.properties.Category}</p>`
-			  )
-			  .addTo(map);
-			});
-				// Code from the next step will go here.
-			
-				</script>
-			  
-		</section> -->
+		
+		<!-- Spotlight -->
+		<section class="spotlight style4 fullscreen orient-right content-align-left image-position-center onscroll-image-fade-in">
+			<div class="content">
+				<h2>Metro Lines</h2>
+				<p> Click on the button to view the full poster, and the original map is <a href = "https://www.ltmetro.com/metro-network-map/">here</a></p>
+				<ul class="actions stacked">
+					<li><a href="images/Line-map-3.jpg" class="button">View the poster</a></li>
+				</ul>
+			</div>
+			<div class="image">
+				<img src="images/Line-map-3.jpg" alt="" />
+			</div>
+		</section>
 
 
 
